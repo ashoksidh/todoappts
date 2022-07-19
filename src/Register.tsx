@@ -14,8 +14,8 @@ const Register = () => {
 
     const navigate =useNavigate();
 
-    const handleSubmit = async (e:any) => {
-        e.preventDefault('');
+    const handleSubmit = async (e:React.MouseEvent<HTMLElement>) => {
+        e.preventDefault();
        if(pwd === matchPwd){
             alert("Registration Success");
            
@@ -58,7 +58,6 @@ const Register = () => {
                      <div className="top">
        <div><h3>Todos</h3></div>
        </div>
-                    <form onSubmit={handleSubmit}>
                     <div className="container">
         <div className="content" >
             <div className="topic">
@@ -86,7 +85,7 @@ const Register = () => {
                              placeholder="Confirm Password" />
 
                     <div>
-                        <button id="butclasston" type="submit"><b>Register</b></button>
+                        <button id="butclasston" type="submit" onClick={handleSubmit}><b>Register</b></button>
                     </div>
                     <div className="direct">
                        <NavLink  to={"/"}>Have an account?Login now </NavLink>
@@ -95,7 +94,6 @@ const Register = () => {
             </div>
         </div>
     </div>
-                   </form>
                   
                 </section>
             

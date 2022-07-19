@@ -7,15 +7,16 @@ import axios from "./api/axios";
 const AddTaskForm = ({ addTask }:any) => {
   const [value, setValue] = useState("");
 
-  const handleSubmit = (e:any) => {
-    e.preventDefault();
+  const handleSubmit = (event:React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
     value && addTask(value)
     setValue("");
   };
 
   return (
-    <form className="head" onSubmit={handleSubmit}>
-        <div >
+   
+    <div className="head">
+        <div  >
       <h1>All Tasks</h1>
       <input
         type="text"
@@ -23,9 +24,9 @@ const AddTaskForm = ({ addTask }:any) => {
         className="textinput" placeholder="Add a new task"
         onChange={e => setValue(e.target.value)}
       />
-      <button type="submit" className="button" >Add</button>
+      <button type="submit" className="button" onClick={handleSubmit}>Add</button>
     </div>
-    </form>
+    </div>
   );
 }
 
@@ -52,7 +53,7 @@ const Todo = () => {
    }
 
    const CREATE_TASK='/api/v1/todos/'
-  const addTask = async (description:any) => { 
+  const addTask = async (description:string) => { 
      
     try{
         await axios.post(
@@ -72,7 +73,7 @@ const Todo = () => {
   } 
   const UPDATE_TASK='/api/v1/todos/'
   
-  const updateTask = async (id:any,completed:any) => { 
+  const updateTask = async (id:string,completed:boolean) => { 
      
     try{
         await axios.patch(
@@ -92,7 +93,7 @@ const Todo = () => {
   } 
 
   const DELET_TASK='/api/v1/todos/'
-  const deleteTask = async (id:number) => { 
+  const deleteTask = async (id:string | number) => { 
      
     try{
         await axios.delete(
@@ -115,12 +116,12 @@ const Todo = () => {
 
   const navigate =useNavigate();
 
-    const onCheckBoxChange =(e:any) =>{
+    const onCheckBoxChange =(e:React.ChangeEvent<HTMLInputElement>) =>{
     const {id,checked} =e.target
     updateTask(id,checked);
   }
 
-  const onDelete =(e:any)=>{
+  const onDelete =(e: React.MouseEvent<HTMLElement>)=>{
     const {id} = e.currentTarget
     deleteTask(id);
   }

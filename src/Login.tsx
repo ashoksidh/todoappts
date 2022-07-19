@@ -14,8 +14,8 @@ function Login() {
     const navigate =useNavigate();
    
 
-    const handleSubmit = async (e:any) => {
-        e.preventDefault('');
+    const handleSubmit = async (e:React.MouseEvent<HTMLElement>) => {
+        e.preventDefault();
        if(!user){
            setUserError("Please add your username")
            return;
